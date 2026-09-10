@@ -242,7 +242,7 @@ export const HomePage = () => {
       <section id="contact" className="landing-section contact-section-creative">
         <div className="container">
           <div className="section-header-box">
-            <h2 className="section-title-main">Contact Our Safari Hub</h2>
+            <h2 className="section-title-main">Contact</h2>
             <p className="section-subtitle-desc">
               Book private group safaris, customize your trail itinerary, or request direct pickup from your Yercaud resort.
             </p>
