@@ -8,7 +8,6 @@
 .site-main {
   flex: 1;
   width: 100%;
-  padding-top: 56px;
 }
 
 .container {
@@ -21,19 +20,19 @@
 }
 
 .page-section {
-  padding: 5rem 0;
-  margin-top: 3rem;
+  padding: 3rem 0;
+  margin-top: 1rem;
 }
 
 .page-section-sm {
-  padding: 2.5rem 0;
+  padding: 1.75rem 0;
 }
 
 .page-header {
-  padding: 3.5rem 0 2rem;
+  padding: 1.75rem 0 1.5rem;
   background: var(--bg-surface-subtle);
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .page-header-title {
@@ -52,14 +51,14 @@
 
 /* Public Header & Ribbon */
 .top-black-ribbon {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   background-color: #000000;
   border-bottom: none;
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
   z-index: 9999;
   box-shadow: none;
 }
