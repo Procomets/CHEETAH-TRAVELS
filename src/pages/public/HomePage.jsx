@@ -39,94 +39,18 @@ export const HomePage = () => {
   }, []);
 
   const autoScrollTimeoutRef = useRef(null);
-  const isHoldingRef = useRef(false);
-  const lockScrollYRef = useRef(0);
-  const touchStartYRef = useRef(0);
-
-  const releaseHold = () => {
-    if (autoScrollTimeoutRef.current) {
-      clearTimeout(autoScrollTimeoutRef.current);
-      autoScrollTimeoutRef.current = null;
-    }
-    isHoldingRef.current = false;
-    window.removeEventListener('wheel', handleWheelLock, { passive: false });
-    window.removeEventListener('keydown', handleKeyLock, { passive: false });
-    window.removeEventListener('touchstart', handleTouchStart);
-    window.removeEventListener('touchmove', handleTouchMove, { passive: false });
-    window.removeEventListener('scroll', handleScrollLock);
-  };
-
-  const handleWheelLock = (e) => {
-    if (!isHoldingRef.current) return;
-    if (e.deltaY > 0) {
-      // Prevent user from scrolling down during 1s pause
-      e.preventDefault();
-    } else if (e.deltaY < 0) {
-      // Allow scrolling back up immediately if user scrolls up
-      releaseHold();
-    }
-  };
-
-  const handleKeyLock = (e) => {
-    if (!isHoldingRef.current) return;
-    if (['ArrowDown', 'PageDown', 'Space', 'End'].includes(e.code)) {
-      e.preventDefault();
-    }
-  };
-
-  const handleTouchStart = (e) => {
-    if (e.touches && e.touches.length > 0) {
-      touchStartYRef.current = e.touches[0].clientY;
-    }
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isHoldingRef.current) return;
-    if (e.touches && e.touches.length > 0) {
-      const touchY = e.touches[0].clientY;
-      const diffY = touchStartYRef.current - touchY;
-      if (diffY > 0) {
-        // Prevent touch scrolling down during 1s pause
-        e.preventDefault();
-      } else if (diffY < 0) {
-        // Allow touch scrolling back up
-        releaseHold();
-      }
-    }
-  };
-
-  const handleScrollLock = () => {
-    if (isHoldingRef.current && window.scrollY > lockScrollYRef.current) {
-      window.scrollTo({ top: lockScrollYRef.current, behavior: 'instant' });
-    }
-  };
 
   const handleHeroAnimationComplete = () => {
-    if (isHoldingRef.current || autoScrollTimeoutRef.current) return;
-
-    isHoldingRef.current = true;
-    lockScrollYRef.current = window.scrollY;
-
-    window.addEventListener('wheel', handleWheelLock, { passive: false });
-    window.addEventListener('keydown', handleKeyLock, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('scroll', handleScrollLock);
+    if (autoScrollTimeoutRef.current) return;
 
     autoScrollTimeoutRef.current = setTimeout(() => {
-      releaseHold();
       const packagesSection = document.getElementById('packages');
       if (packagesSection) {
         packagesSection.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 1000); // Hold/pause 1 second before auto-scrolling to next section
+      autoScrollTimeoutRef.current = null;
+    }, 1000); // Waits 1 second after animation completes before moving to next section
   };
-
-  useEffect(() => {
-    return () => {
-      releaseHold();
-    };
-  }, []);
 
   const scrollToSection = (sectionId) => {
     const el = document.getElementById(sectionId);
