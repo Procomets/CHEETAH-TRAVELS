@@ -27,6 +27,7 @@ const ScrollExpand = ({
   overlayScrim = 0.45,
   useWindowScroll = false,
   enabled = true,
+  onComplete,
   children,
   className = '',
   style,
@@ -41,6 +42,9 @@ const ScrollExpand = ({
   const overlayRef = useRef(null);
   const scrimRef = useRef(null);
   const hintRef = useRef(null);
+  const hasCompletedRef = useRef(false);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   const propsRef = useRef({});
   propsRef.current = {
@@ -92,6 +96,16 @@ const ScrollExpand = ({
       const inn = smoothstep(0.68, 1, p);
       overlayRef.current.style.opacity = `${inn}`;
       overlayRef.current.style.transform = `translate3d(0, ${18 * (1 - inn)}px, 0)`;
+    }
+
+    // Trigger onComplete when expansion reaches 95%+ and pause 1s before moving
+    if (p >= 0.95 && !hasCompletedRef.current) {
+      hasCompletedRef.current = true;
+      if (onCompleteRef.current) {
+        onCompleteRef.current();
+      }
+    } else if (p < 0.2) {
+      hasCompletedRef.current = false;
     }
   }, []);
 
