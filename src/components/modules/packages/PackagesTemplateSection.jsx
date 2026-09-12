@@ -20,7 +20,7 @@ import '../../../styles/packagesTemplate.css';
 
 // Jeep Safari images for the grid mapping
 const pkgImages = [
-  "/pkg-auto.jpg", // Auto
+  "https://5.imimg.com/data5/SELLER/Default/2026/2/584527915/KF/EX/JG/1698931/greaves-auto-rickshaw-500x500.png", // Auto
   "/pkg-car.jpg", // Car
   "/pkg-jeep.jpg", // Jeep
   "/pkg-big-jeep.jpg"  // Big Jeep

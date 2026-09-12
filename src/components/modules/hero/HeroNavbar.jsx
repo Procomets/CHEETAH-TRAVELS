@@ -75,9 +75,7 @@ export const HeroNavbar = () => {
             onClick={(e) => scrollToSection(e, 'hero')}
             className="hero-brand"
           >
-            <span className="hero-brand-icon-box">
-              <Compass size={22} className="hero-brand-icon-svg" />
-            </span>
+
             <span className="hero-brand-text">
               <span className="brand-cheetah">CHEETAH</span>
               <span className="brand-travels">TRAVELS</span>
