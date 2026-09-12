@@ -19,7 +19,7 @@ export const packagesData = [
     highlights: ["Misty Valley Viewpoint", "Pagoda Point Sunrise", "Coffee Plantation Trail", "Hot Tea & Snacks"],
     included: ["Customized 4x4 Thar/Gypsy", "Experienced Local Driver Guide", "Permit & Entry Fees", "Tea & Refreshments"],
     suitableFor: "Couples, Families, Photographers",
-    badge: "Most Popular",
+    badge: "Guest Favourite",
     description: "Experience the awakening of Yercaud from the highest viewpoints. Navigate through dew-soaked winding trails and watch the dawn cast golden hues over the Salem plains."
   },
   {
@@ -42,7 +42,7 @@ export const packagesData = [
     highlights: ["Kiliyur Secret Stream", "Dense Silver Oak Forests", "Tribal Village Checkpoint", "Rocky Stream Crossing"],
     included: ["High-clearance 4x4 Jeep", "Forest Entry Permits", "Local Naturalist Guide", "Safety Equipment"],
     suitableFor: "Adventure Seekers, Friends, Nature Lovers",
-    badge: "Adventure Pick",
+    badge: "Prime Pick",
     description: "An exhilarating off-road safari that takes you far away from commercial tourist spots into untouched reserve forest trails and cascading mountain streams."
   },
   {
@@ -65,7 +65,7 @@ export const packagesData = [
     highlights: ["Lady's Seat & Arthur's Seat", "Shevaroy Temple Peak", "Botanical & Spice Groves", "Kiliyur Falls View", "Silk Farm & Heritage Point"],
     included: ["Full-day Dedicated Jeep", "All Viewpoint Entry Passes", "Bottled Water & Snacks", "Photo Stops with Driver Assistant"],
     suitableFor: "Families, Group Tours, First-time Visitors",
-    badge: "Best Value",
+    badge: "Top Safari",
     description: "The definitive full-circuit safari designed to show you the true essence of Yercaud hill station with maximum comfort and scenic stops."
   },
   {
@@ -88,7 +88,7 @@ export const packagesData = [
     highlights: ["Sunset Cliff Point", "Nocturnal Wildlife Spotting", "Starry Night View from Ridge", "Bonfire Tea Halt"],
     included: ["High-power Spotlight 4x4 Jeep", "Night Permit", "Warm Herbal Drink", "Guide"],
     suitableFor: "Stargazers, Couples, Photography Enthusiasts",
-    badge: "Unique Experience",
+    badge: "Bestseller",
     description: "Witness spectacular sunset gradients across the valley, transitioning into a cool mountain breeze and night-time safari along the ridge."
   }
 ];

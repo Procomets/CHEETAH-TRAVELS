@@ -1,45 +1,23 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Compass, Shield, CalendarCheck } from 'lucide-react';
-import { publicNavLinks } from '../../routes/navigation';
-import { Button } from '../common/Button';
+import { Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   return (
-    <header className="site-header">
+    <header className="top-black-ribbon">
       <div className="container">
-        <div className="navbar-inner">
-          <Link to="/" className="nav-brand">
-            <Compass size={28} />
-            <span>Yercaud Safari</span>
+        <div className="ribbon-inner">
+          <Link to="/" className="ribbon-logo-link" aria-label="Cheetah Travels Home">
+            <img
+              src="/Cheetah Travels.svg"
+              alt="Cheetah Travels"
+              className="ribbon-logo-img"
+            />
           </Link>
-
-          <nav>
-            <ul className="nav-links">
-              {publicNavLinks.map((item) => (
-                <li key={item.path}>
-                  <NavLink
-                    to={item.path}
-                    className={({ isActive }) =>
-                      isActive ? 'nav-link active' : 'nav-link'
-                    }
-                    end={item.exact}
-                  >
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="nav-actions">
-            <Button to="/booking" variant="primary" size="sm" icon={CalendarCheck}>
-              Book Safari
-            </Button>
-            <Button to="/admin" variant="secondary" size="sm" icon={Shield}>
-              Admin
-            </Button>
-          </div>
+          <a href="tel:+917538843075" className="ribbon-phone-link">
+            <Phone size={16} color="#ffffff" className="ribbon-phone-icon" />
+            <span>+91 75388 43075</span>
+          </a>
         </div>
       </div>
     </header>

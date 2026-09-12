@@ -6,7 +6,7 @@ import { PlaceCardPlaceholder } from '../../components/modules/places/PlaceCardP
 export const PlacesToVisitPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const categories = ['All', 'Viewpoint', 'Waterfalls & Forest', 'Highest Peak / Heritage', 'Private Estate Trails'];
+  const categories = ['All', 'Cliff Viewpoint', 'Sacred Shrine', 'Botanical & Gardens', 'Waterfalls & Forest', 'Parks & Aviary'];
 
   const filteredPlaces = activeCategory === 'All'
     ? placesData
@@ -34,7 +34,7 @@ export const PlacesToVisitPage = () => {
         </div>
 
         {/* Places Grid */}
-        <div className="grid-3">
+        <div className="grid-4">
           {filteredPlaces.map((place) => (
             <PlaceCardPlaceholder key={place.id} place={place} />
           ))}

@@ -1,7 +1,8 @@
 /* Places Template Section Styles */
 
 .places-template-section {
-  padding: 6rem 0;
+  padding: 5rem 0;
+  margin-top: 3.5rem;
   position: relative;
   background-color: #ffffff; /* Explicitly white background as in template */
   color: #1a1a1a;
@@ -61,7 +62,7 @@
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 800;
-  color: #2d4a22; /* Dark green matching template */
+  color: #1E826F; /* Lighter emerald green */
   line-height: 1.2;
   margin-bottom: 1.5rem;
 }
@@ -96,7 +97,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #4a5f22; /* Olive green */
+  background-color: #1E826F; /* Brand green */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,7 +109,7 @@
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
-  color: #2d4a22;
+  color: #1E826F;
   margin-bottom: 0.25rem;
 }
 
@@ -124,7 +125,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #3f521c;
+  background-color: #1E826F;
   color: #ffffff;
   font-family: var(--font-heading);
   font-weight: 600;
@@ -135,7 +136,7 @@
 }
 
 .pt-btn-view-more:hover {
-  background-color: #2d4a22;
+  background-color: #155A4C;
   transform: translateY(-2px);
   color: #ffffff;
 }
@@ -156,7 +157,7 @@
   transform: translateY(-50%);
   width: 500px;
   height: 500px;
-  background-color: #e6f4f1; /* Light cyan/mint */
+  background-color: #E8F6F2; /* Light mint background tint */
   border-radius: 50%;
   z-index: 0;
 }
@@ -242,18 +243,18 @@
   height: 50px;
   border-radius: 50%;
   background-color: #ffffff;
-  border: 2px solid #3f521c;
+  border: 2px solid #1E826F;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3f521c;
+  color: #1E826F;
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease;
 }
 
 .pt-scroll-btn:hover {
-  background-color: #3f521c;
+  background-color: #1E826F;
   color: #ffffff;
 }
 

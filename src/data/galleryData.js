@@ -70,7 +70,7 @@ export const galleryData = [
     title: "Sunset Convoy Return",
     category: "Fleet",
     caption: "Our vehicles lining up as the sun sets over Yercaud",
-    image: "https://images.unsplash.com/photo-1473220464506-696614138b55?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
     spanClass: "bento-square"
   },
   {

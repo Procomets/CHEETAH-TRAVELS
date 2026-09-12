@@ -14,27 +14,33 @@ import {
   ShieldCheck, 
   Leaf,
   Users,
-  Check
+  Check,
+  Star,
+  Sun,
+  Compass
 } from 'lucide-react';
 import '../../../styles/packagesTemplate.css';
 
 // Jeep Safari images for the grid mapping
 const pkgImages = [
-  "https://5.imimg.com/data5/SELLER/Default/2026/2/584527915/KF/EX/JG/1698931/greaves-auto-rickshaw-500x500.png", // Auto
-  "/pkg-car.jpg", // Car
-  "/pkg-jeep.jpg", // Jeep
-  "/pkg-big-jeep.jpg"  // Big Jeep
+  "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
 ];
 
-const pkgIcons = [Camera, Car, Map, Clock];
+const pkgBadges = [
+  { label: 'Guest Favourite', icon: null },
+  { label: 'Prime Pick', icon: Star },
+  { label: 'Top Safari', icon: Award },
+  { label: 'Bestseller', icon: Star }
+];
 
 export const PackagesTemplateSection = () => {
   const timelineRef = useRef(null);
   const [progress, setProgress] = useState(0);
-
   const [durationFilter, setDurationFilter] = useState('Half Day');
 
-  // Currently displaying all 4 packages under both tabs as requested
   const filteredPackages = packagesData;
 
   useEffect(() => {
@@ -43,9 +49,7 @@ export const PackagesTemplateSection = () => {
       const rect = timelineRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Start animation when timeline is in lower half of screen
       const start = windowHeight * 0.8;
-      // End animation when timeline reaches upper third of screen
       const end = windowHeight * 0.3;
       
       let p = (start - rect.top) / (start - end);
@@ -54,7 +58,7 @@ export const PackagesTemplateSection = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -62,7 +66,10 @@ export const PackagesTemplateSection = () => {
     <section id="packages" className="pkg-template-section">
       {/* 1. Grid Section */}
       <div className="pkg-header">
-        <h2 className="pkg-title">JEEP SAFARI PACKAGES</h2>
+        <h2 className="pkg-title">Jeep Safari Packages</h2>
+        <p className="pkg-subtitle">
+          Choose from curated half-day mountain loops to comprehensive full-day off-road circuits across Yercaud's private forest trails.
+        </p>
       </div>
 
       <div className="pkg-filters">
@@ -71,57 +78,93 @@ export const PackagesTemplateSection = () => {
             className={`pkg-filter-btn ${durationFilter === 'Half Day' ? 'active' : ''}`}
             onClick={() => setDurationFilter('Half Day')}
           >
-            Half Day
+            <Sun size={15} />
+            <span>Half Day Trails</span>
           </button>
           <button 
             className={`pkg-filter-btn ${durationFilter === 'Full Day' ? 'active' : ''}`}
             onClick={() => setDurationFilter('Full Day')}
           >
-            Full Day
+            <Compass size={15} />
+            <span>Full Day Expeditions</span>
           </button>
         </div>
       </div>
 
       {filteredPackages.length > 0 ? (
         <div className="pkg-grid">
-          {filteredPackages.map((pkg, index) => {
-            const Icon = pkgIcons[index % pkgIcons.length];
+          {filteredPackages.map((pkg) => {
             return (
               <div className="pkg-card" key={pkg.id}>
+                {/* Image Container */}
                 <div className="pkg-card-img-wrapper">
                   <img 
                     src={pkgImages[packagesData.findIndex(p => p.id === pkg.id) % pkgImages.length]} 
                     alt={pkg.title} 
                     className="pkg-card-img" 
                   />
-                  <div className="pkg-card-icon">
-                    <Icon size={20} />
-                  </div>
-                </div>
-                <div className="pkg-card-content">
-                  <div className="pkg-card-meta-header">
-                    <span className="pkg-price">₹{pkg.prices[durationFilter].toLocaleString()}</span>
-                  </div>
-                  <h3 className="pkg-card-title">{pkg.title}</h3>
-                  <p className="pkg-card-desc">{pkg.subtitle}</p>
                   
-                  <div className="pkg-meta-row">
-                    <span className="pkg-meta-item"><Car size={14} /> {pkg.vehicle}</span>
-                    <span className="pkg-meta-item"><Clock size={14} /> {pkg.duration}</span>
-                    <span className="pkg-meta-item"><Users size={14} /> {pkg.capacity}</span>
+                  {/* Top Left Badge */}
+                  <div className="pkg-pill-badge">
+                    <Star size={13} className="pkg-badge-star" />
+                    <span>{pkg.badge || 'Guest Favourite'}</span>
                   </div>
 
-                  <ul className="pkg-highlights-list">
-                    {pkg.highlights.slice(0, 3).map((hl, i) => (
-                      <li key={i}><Check size={14} className="pkg-check-icon" /> {hl}</li>
-                    ))}
-                  </ul>
+                  {/* Top Right Heart Action */}
+                  <button className="pkg-favorite-btn" aria-label="Favorite Safari">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                  </button>
+                </div>
 
+                {/* Content Details */}
+                <div className="pkg-card-content">
+                  <div className="pkg-card-header-row">
+                    <h3 className="pkg-card-title">{pkg.title}</h3>
+                    <div className="pkg-price-box">
+                      <span className="pkg-price-amount">₹{pkg.prices[durationFilter].toLocaleString()}</span>
+                      <span className="pkg-price-unit">/ safari</span>
+                    </div>
+                  </div>
+
+                  <p className="pkg-card-desc">{pkg.subtitle}</p>
+
+                  {/* Specs Bar (divided into 3 columns like reference image) */}
+                  <div className="pkg-specs-bar">
+                    <div className="pkg-spec-col">
+                      <Clock size={14} />
+                      <span>{pkg.duration}</span>
+                    </div>
+                    <div className="pkg-spec-divider"></div>
+                    <div className="pkg-spec-col">
+                      <Users size={14} />
+                      <span>{pkg.capacity}</span>
+                    </div>
+                    <div className="pkg-spec-divider"></div>
+                    <div className="pkg-spec-col">
+                      <Car size={14} />
+                      <span>{pkg.vehicle}</span>
+                    </div>
+                  </div>
+
+                  {/* Highlight Tags Row */}
+                  <div className="pkg-tags-row">
+                    {pkg.highlights.slice(0, 2).map((hl, i) => (
+                      <span className="pkg-pill-tag" key={i}>{hl}</span>
+                    ))}
+                    {pkg.highlights.length > 2 && (
+                      <span className="pkg-pill-tag tag-more">+{pkg.highlights.length - 2}</span>
+                    )}
+                  </div>
+
+                  {/* Full Width CTA Pill Button */}
                   <BookingButton 
-                    message={`Hello, I'm interested in the ${pkg.title} package.`}
-                    className="pkg-card-link"
+                    message={`Hello Cheetah Travels, I would like to book the "${pkg.title}" package (${durationFilter}: ₹${pkg.prices[durationFilter]?.toLocaleString()} per jeep). Please confirm availability and details.`}
+                    className="pkg-card-cta-btn"
                   >
-                    Book Now <ArrowRight size={16} />
+                    <span>Book Safari</span>
+                    <ArrowRight size={16} />
                   </BookingButton>
                 </div>
               </div>
@@ -130,13 +173,12 @@ export const PackagesTemplateSection = () => {
         </div>
       ) : (
         <div className="pkg-empty-state">
-          <p>No safari packages currently available for {timeFilter} - {durationFilter}. Please try another combination.</p>
+          <p>No safari packages currently available. Please try another duration filter.</p>
         </div>
       )}
 
       {/* 2. Timeline Section */}
       <div className="pkg-timeline-wrapper">
-        <span className="pkg-timeline-eyebrow">How It Works</span>
         <h2 className="pkg-timeline-title">A Smarter Way to Explore</h2>
         
         <div className="pkg-timeline" ref={timelineRef}>

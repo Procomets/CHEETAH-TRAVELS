@@ -1,26 +1,33 @@
 :root {
-  /* Color Palette - Forest & Safari Earth Tones */
-  --color-primary-50: #e8f5e9;
-  --color-primary-100: #c8e6c9;
-  --color-primary-200: #a5d6a7;
-  --color-primary-500: #2e7d32;
-  --color-primary-600: #1b5e20;
-  --color-primary-700: #144618;
-  --color-primary-800: #0f3312;
-  --color-primary-900: #09200b;
+  /* Exact Palette Tokens: #155A4C | #1E826F | #E8F6F2 | #F7F6F1 | #C8A96A */
+  --color-royal-dark: #155A4C;
+  --color-royal-green: #1E826F;
+  --color-royal-mint: #E8F6F2;
+  --color-royal-cream: #ffffff;
+  --color-royal-gold: #C8A96A;
 
-  --color-accent-amber: #f59e0b;
-  --color-accent-orange: #ea580c;
-  --color-accent-sand: #d97706;
+  --color-primary-50: #E8F6F2;
+  --color-primary-100: #c5ebe0;
+  --color-primary-200: #9ee0cf;
+  --color-primary-500: #259B85;
+  --color-primary-600: #1E826F;
+  --color-primary-700: #155A4C;
+  --color-primary-800: #0f4338;
+  --color-primary-900: #0b3028;
+
+  --color-accent-gold: #C8A96A;
+  --color-accent-amber: #C8A96A;
+  --color-accent-orange: #1E826F;
+  --color-accent-sand: #155A4C;
 
   /* Neutral Dark / Surface Tokens */
-  --bg-page: #f8fafc;
+  --bg-page: #ffffff;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #ffffff;
-  --bg-surface-subtle: #f1f5f9;
-  --bg-dark: #0f172a;
-  --bg-dark-surface: #1e293b;
-  --bg-dark-subtle: #334155;
+  --bg-surface-subtle: #E8F6F2;
+  --bg-dark: #155A4C;
+  --bg-dark-surface: #1E826F;
+  --bg-dark-subtle: #259B85;
 
   /* Text Colors */
   --text-main: #0f172a;

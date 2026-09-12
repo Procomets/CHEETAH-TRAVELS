@@ -1,59 +1,41 @@
-import React from 'react';
-import { Heart, ArrowLeft, ArrowRight } from 'lucide-react';
-import { placesData } from '../../../data/placesData';
+import React, { useState } from 'react';
+import { Heart, ChevronRight } from 'lucide-react';
 import '../../../styles/placeCard.css';
 
 export const PlaceCardPlaceholder = ({ place }) => {
-  const index = placesData.findIndex(p => p.id === place.id) + 1;
-  
-  // Generating dots for rating
-  const renderDots = () => {
-    const dots = [];
-    for (let i = 1; i <= 5; i++) {
-      dots.push(
-        <span key={i} className={`pc-dot ${i <= Math.round(place.rating) ? 'filled' : ''}`}>●</span>
-      );
-    }
-    return dots;
-  };
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div className="pc-card">
-      <div className="pc-image-wrapper">
-        <img src={place.image} alt={place.name} className="pc-image" />
-        <button className="pc-heart-btn" aria-label="Save">
-          <Heart size={18} />
+      {/* Full Background Image */}
+      <img src={place.image} alt={place.name} className="pc-bg-image" />
+
+      {/* Dark Scrim Overlay */}
+      <div className="pc-scrim-overlay">
+        {/* Top Right Heart Action Button */}
+        <button 
+          className={`pc-favorite-btn ${isFavorite ? 'active' : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsFavorite(!isFavorite);
+          }}
+          aria-label="Save Place"
+        >
+          <Heart size={16} fill={isFavorite ? '#ef4444' : 'none'} color={isFavorite ? '#ef4444' : '#ffffff'} />
         </button>
-        <div className="pc-carousel-arrows">
-          <button className="pc-arrow"><ArrowLeft size={16} /></button>
-          <button className="pc-arrow"><ArrowRight size={16} /></button>
-        </div>
-        <div className="pc-carousel-dots">
-          <span className="pc-carousel-dot active"></span>
-          <span className="pc-carousel-dot"></span>
-          <span className="pc-carousel-dot"></span>
-          <span className="pc-carousel-dot"></span>
-        </div>
-      </div>
-      
-      <div className="pc-content">
-        <h3 className="pc-title">{index}. {place.name}</h3>
-        
-        <div className="pc-rating-row">
-          <span className="pc-rating-score">{place.rating}</span>
-          <div className="pc-rating-dots">{renderDots()}</div>
-          <span className="pc-rating-count">({place.ratingCount})</span>
-        </div>
-        
-        <div className="pc-category">{place.category}</div>
-        
-        <div className="pc-divider"></div>
-        
-        <div className="pc-review">
-          <img src={place.reviewAvatar} alt={place.reviewAuthor} className="pc-review-avatar" />
-          <div className="pc-review-content">
-            <span className="pc-review-author">By {place.reviewAuthor}</span>
-            <p className="pc-review-text">{place.reviewText}</p>
+
+        {/* Bottom Content Area */}
+        <div className="pc-bottom-content">
+          {/* Title & Category/Meta info */}
+          <h3 className="pc-title">{place.name}</h3>
+          <p className="pc-subtitle">
+            {place.elevation ? `${place.elevation} • ` : ''}{place.category}
+          </p>
+
+          {/* Full Width Glass Capsule CTA Button */}
+          <div className="pc-cta-glass-btn">
+            <span>Explore Spot</span>
+            <ChevronRight size={16} className="pc-cta-arrow" />
           </div>
         </div>
       </div>

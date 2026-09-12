@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CalendarCheck,
-  Compass,
   MapPin,
   ShieldCheck,
   Truck,
@@ -13,9 +12,7 @@ import {
   Users,
   Award
 } from 'lucide-react';
-import { HeroNavbar } from '../../components/modules/hero/HeroNavbar';
 import ScrollExpand from '../../components/modules/hero/ScrollExpand';
-import GlowCursor from '../../components/modules/interactive/GlowCursor';
 import { packagesData } from '../../data/packagesData';
 import { placesData } from '../../data/placesData';
 import { reviewsData } from '../../data/reviewsData';
@@ -26,7 +23,6 @@ import { ContactFormPlaceholder } from '../../components/modules/contact/Contact
 import { ReviewCardPlaceholder } from '../../components/modules/reviews/ReviewCardPlaceholder';
 import { Card, CardBody } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
-import { Footer } from '../../components/layout/Footer';
 import { CONTACT_INFO, getWhatsAppUrl } from '../../utils/constants';
 import { BookingButton } from '../../components/common/BookingButton';
 
@@ -60,9 +56,6 @@ export const HomePage = () => {
           1. HERO SECTION (Full-Screen Video Background with 35% Edge Blur)
           ========================================================================= */}
       <section id="hero" aria-label="Yercaud Jeep Safari Hero" style={{ position: 'relative', background: '#070d0a' }}>
-        {/* Top Fixed / Transparent Navigation */}
-        <HeroNavbar />
-
         <ScrollExpand
           src="https://res.cloudinary.com/dmu8jxozw/video/upload/Jeep_climbing_mountain_drone_view_202609081919_gwr_video_mvp.mp4"
           mediaType="video"
@@ -80,11 +73,11 @@ export const HomePage = () => {
           enabled={true}
         >
           {/* Hero Center Content */}
-          <div className="hero-content-wrapper" style={{ position: 'relative', zIndex: 10 }}>
+          <div className="hero-content-inner">
             {/* Main Heading */}
             <h1 className="hero-main-title">
-              <span className="highlight-line">CHEETAH</span>
-              <span className="safari-line">TRAVELS</span>
+              <span className="welcome-line">CHEETAH TRAVELS</span>
+              <span className="safari-line">YERCAUD JEEP SAFARI</span>
             </h1>
 
             {/* Supporting Text */}
@@ -101,15 +94,6 @@ export const HomePage = () => {
                 <CalendarCheck size={18} />
                 <span>BOOK YOUR SAFARI</span>
               </BookingButton>
-
-              <button
-                type="button"
-                onClick={() => scrollToSection('packages')}
-                className="btn-hero-secondary"
-              >
-                <Compass size={18} />
-                <span>EXPLORE YERCAUD</span>
-              </button>
             </div>
           </div>
         </ScrollExpand>
@@ -132,7 +116,7 @@ export const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid-3" style={{ gap: '1.5rem' }}>
+          <div className="grid-4" style={{ gap: '1.5rem' }}>
             {placesData.map((place) => (
               <PlaceCardPlaceholder key={place.id} place={place} />
             ))}
@@ -157,24 +141,9 @@ export const HomePage = () => {
       </section>
 
       {/* =========================================================================
-          ANIMATED MARQUEE DIVIDER
+          5. ABOUT US SECTION (Preserved for future use)
           ========================================================================= */}
-      <div className="animated-gap-marquee">
-        <div className="marquee-content">
-          <span>EXPERIENCE YERCAUD OFF-ROAD</span>
-          <span>BOOK YOUR SAFARI TODAY</span>
-          <span>12 YEARS MOUNTAIN EXPERTISE</span>
-          <span>CONQUER THE HIDDEN TRAILS</span>
-          <span>EXPERIENCE YERCAUD OFF-ROAD</span>
-          <span>BOOK YOUR SAFARI TODAY</span>
-          <span>12 YEARS MOUNTAIN EXPERTISE</span>
-          <span>CONQUER THE HIDDEN TRAILS</span>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          5. ABOUT US SECTION
-          ========================================================================= */}
+      {/*
       <section id="about" className="creative-about-section">
         <div className="about-hero-container">
           <div className="about-bg-mountain" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80')" }}></div>
@@ -187,74 +156,30 @@ export const HomePage = () => {
             <div className="about-vertical-text">MAHINDRA 4X4 THAR <br /> <span style={{ fontSize: '0.5em' }}>EXPLORER EDITION</span></div>
           </div>
 
-          <div className="about-sub-badge">12 YR MOUNTAIN EXPERTISE</div>
-          <div className="about-cta">
-            <BookingButton
-              message="Hello Cheetah Travels, I would like to book a Yercaud Jeep Safari."
-              className="btn btn-primary"
-            >
-              TAKE THE RIDE
-            </BookingButton>
-          </div>
-
           <div className="about-divider"></div>
         </div>
+      </section>
+      */}
 
-        <div className="about-content-bottom container">
+      {/* =========================================================================
+          6. REVIEWS & TESTIMONIALS SECTION
+          ========================================================================= */}
+      <section id="reviews" className="landing-section landing-section-alt">
+        <div className="container">
+          <div className="section-header-box">
+            <h2 className="section-title-main">What Travelers Say About Our Safaris</h2>
+            <p className="section-subtitle-desc">
+              Real stories and experiences from guests who explored Yercaud with Cheetah Travels.
+            </p>
+          </div>
 
-          {/* Testimonials within About */}
-          <div style={{ marginTop: '5rem' }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>
-              What Travelers Say About Our Safaris
-            </h3>
-            <div className="grid-3" style={{ gap: '1.25rem' }}>
-              {reviewsData.map((rev) => (
-                <ReviewCardPlaceholder key={rev.id} review={rev} />
-              ))}
-            </div>
+          <div className="grid-3" style={{ gap: '1.25rem' }}>
+            {reviewsData.map((rev) => (
+              <ReviewCardPlaceholder key={rev.id} review={rev} />
+            ))}
           </div>
         </div>
       </section>
-
-
-      {/* =========================================================================
-          INTERACTIVE GAP (Glow Cursor)
-          ========================================================================= */}
-      <div style={{ position: 'relative', width: '100%', height: '400px', background: '#070d0a', overflow: 'hidden' }}>
-        <GlowCursor
-          color="#F97316"
-          secondaryColor="#000000"
-          trailLength={29}
-          trailWidth={8}
-          trailTaper={0.7}
-          followSpeed={0.4}
-          glowIntensity={1.9}
-          glowSpread={1.2}
-          hotspot={0.47}
-          brightness={1.25}
-          opacity={1}
-          pulseSpeed={2.2}
-          noiseStrength={0.035}
-          idleFade={false}
-          idleTimeout={700}
-          fadeDuration={1200}
-          blendMode="screen"
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', zIndex: 10, position: 'relative' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'white', marginBottom: '1rem', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '2px' }}>
-              REVEAL THE UNSEEN TRAILS
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem' }}>
-              Hover over the darkness to explore.
-            </p>
-          </div>
-        </GlowCursor>
-      </div>
-
-      {/* =========================================================================
-          7. FOOTER COMPONENT (Bottom of Page)
-          ========================================================================= */}
-      <Footer />
     </div>
   );
 };
