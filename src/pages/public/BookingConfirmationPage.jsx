@@ -12,7 +12,7 @@ export const BookingConfirmationPage = () => {
   const bookingId = searchParams.get('id') || 'YJS-782194';
   const booking = bookingService.getBookingById(bookingId) || {
     id: bookingId,
-    packageName: "Sunrise Peak Expedition",
+    packageName: "Auto Safari",
     safariDate: "2026-09-12",
     timeSlot: "06:00 AM - 09:00 AM (Sunrise)",
     guestsCount: 4,

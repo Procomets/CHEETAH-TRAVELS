@@ -1,62 +1,103 @@
-import React from 'react';
-import { Compass, Clock, Users, ArrowRight } from 'lucide-react';
-import { Card, CardHeader, CardBody, CardFooter } from '../../common/Card';
-import { Badge } from '../../common/Badge';
-import { Button } from '../../common/Button';
-import { formatCurrency } from '../../../utils/formatters';
-import { getWhatsAppUrl } from '../../../utils/constants';
+import React, { useState } from 'react';
+import { Clock, Users, Car, Star, Heart, ArrowRight } from 'lucide-react';
+import { BookingButton } from '../../common/BookingButton';
+import '../../../styles/packagesTemplate.css';
+
+const defaultImages = {
+  'sunrise-peak': "/pkg-auto.jpg",
+  'deep-forest-adventure': "/pkg-car.jpg",
+  'yercaud-grand-circuit': "/pkg-jeep.jpg",
+  'sunset-night-trail': "/pkg-big-jeep.jpg"
+};
 
 export const PackageCardPlaceholder = ({ item }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+  const imgUrl = item.image || defaultImages[item.id] || "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80";
+  const displayPrice = typeof item.price === 'number' 
+    ? item.price 
+    : (item.prices?.['Half Day'] || item.prices?.['Full Day'] || 1500);
+
   return (
-    <Card>
-      <CardHeader>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-          {item.badge ? (
-            <Badge variant="success">{item.badge}</Badge>
-          ) : (
-            <Badge variant="neutral">{item.difficulty}</Badge>
-          )}
-          <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary-600)' }}>
-            {formatCurrency(item.price)}
-          </span>
-        </div>
-        <h3 className="card-title">{item.title}</h3>
-        <p className="card-subtitle">{item.subtitle}</p>
-      </CardHeader>
-
-      <CardBody>
-        <div style={{ display: 'flex', gap: '1rem', margin: '0.75rem 0', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-            <Clock size={14} /> {item.duration}
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-            <Users size={14} /> {item.capacity}
-          </span>
+    <div className="pkg-card">
+      {/* Image Container */}
+      <div className="pkg-card-img-wrapper">
+        <img src={imgUrl} alt={item.title} className="pkg-card-img" />
+        
+        {/* Top Left Badge */}
+        <div className="pkg-pill-badge">
+          <Star size={13} className="pkg-badge-star" />
+          <span>{item.badge || 'Guest Favourite'}</span>
         </div>
 
-        <ul style={{ listStyle: 'none', padding: 0, margin: '1rem 0', fontSize: '0.875rem' }}>
-          {item.highlights?.slice(0, 3).map((h, i) => (
-            <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem', color: 'var(--text-main)' }}>
-              <span style={{ color: 'var(--color-primary-600)', fontWeight: 'bold' }}>✓</span> {h}
-            </li>
-          ))}
-        </ul>
-      </CardBody>
-
-      <CardFooter>
-        <Button to={`/packages/${item.id}`} variant="secondary" size="sm">
-          View Details
-        </Button>
-        <a
-          href={getWhatsAppUrl(`Hello Cheetah Travels, I would like to book the "${item.title}" package (${item.duration}, ${formatCurrency(item.price)}).`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary btn-sm"
+        {/* Top Right Heart Action */}
+        <button 
+          type="button"
+          className={`pkg-favorite-btn ${isFavorited ? 'active' : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsFavorited(!isFavorited);
+          }}
+          aria-label="Favorite Safari"
         >
-          <span>Book Now</span>
-          <ArrowRight size={15} />
-        </a>
-      </CardFooter>
-    </Card>
+          <Heart 
+            size={16} 
+            fill={isFavorited ? '#ef4444' : 'none'} 
+            color={isFavorited ? '#ef4444' : '#64748b'} 
+            strokeWidth={2.4} 
+          />
+        </button>
+      </div>
+
+      {/* Content Details */}
+      <div className="pkg-card-content">
+        <div className="pkg-card-header-row">
+          <h3 className="pkg-card-title">{item.title}</h3>
+          <div className="pkg-price-box">
+            <span className="pkg-price-amount">₹{displayPrice.toLocaleString()}</span>
+            <span className="pkg-price-unit">/ safari</span>
+          </div>
+        </div>
+
+        <p className="pkg-card-desc">{item.subtitle}</p>
+
+        {/* Specs Bar (divided into 3 columns) */}
+        <div className="pkg-specs-bar">
+          <div className="pkg-spec-col">
+            <Clock size={14} />
+            <span>{item.duration}</span>
+          </div>
+          <div className="pkg-spec-divider"></div>
+          <div className="pkg-spec-col">
+            <Users size={14} />
+            <span>{item.capacity}</span>
+          </div>
+          <div className="pkg-spec-divider"></div>
+          <div className="pkg-spec-col">
+            <Car size={14} />
+            <span>{item.vehicle || 'Jeep'}</span>
+          </div>
+        </div>
+
+        {/* Highlight Tags Row */}
+        <div className="pkg-tags-row">
+          {item.highlights?.slice(0, 2).map((hl, i) => (
+            <span className="pkg-pill-tag" key={i}>{hl}</span>
+          ))}
+          {item.highlights?.length > 2 && (
+            <span className="pkg-pill-tag tag-more">+{item.highlights.length - 2}</span>
+          )}
+        </div>
+
+        {/* Full Width CTA Pill Button */}
+        <BookingButton 
+          message={`Hello Cheetah Travels, I would like to book the "${item.title}" package. Please confirm availability and details.`}
+          className="pkg-card-cta-btn"
+        >
+          <span>Book Safari</span>
+          <ArrowRight size={16} />
+        </BookingButton>
+      </div>
+    </div>
   );
 };
+

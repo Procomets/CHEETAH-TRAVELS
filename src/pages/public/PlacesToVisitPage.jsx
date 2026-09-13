@@ -17,6 +17,9 @@ export const PlacesToVisitPage = () => {
       <PageHeader
         title="Places to Visit in Yercaud"
         subtitle="Discover breathtaking viewpoints, hidden waterfalls, and misty peaks accessible via 4x4 Jeep Safari."
+        showBack={true}
+        backTo="/"
+        backLabel="Back to Home"
       />
 
       <div className="container" style={{ paddingBottom: '4rem' }}>

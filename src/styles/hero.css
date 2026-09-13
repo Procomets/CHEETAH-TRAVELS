@@ -518,6 +518,25 @@
   }
 }
 
+/* Mobile-only bottom fade to white */
+.hero-mobile-fade-bottom {
+  display: none; /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .hero-mobile-fade-bottom {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    z-index: 20;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 640px) {
   .hero-content-wrapper {
     padding: 4.5rem 1.25rem 1.5rem;

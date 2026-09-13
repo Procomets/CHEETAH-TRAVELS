@@ -3,82 +3,109 @@ export const galleryCategories = ["All", "Jeeps & Fleet", "Misty Trails", "Water
 export const galleryData = [
   {
     id: "gal-01",
-    title: "Thar 4x4 Climbing Mud Tracks",
-    category: "Action",
-    caption: "Tackling 35-degree rocky inclines in Grange estate",
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
-    spanClass: "bento-wide"
-  },
-  {
-    id: "gal-02",
-    title: "Sunrise at Eastern Cliffs",
-    category: "Viewpoint",
-    caption: "Early morning sea of clouds view from Pagoda ridge",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    spanClass: "bento-square"
-  },
-  {
-    id: "gal-03",
-    title: "Kiliyur Secret Stream",
+    title: "Yercaud Hill Park & Walkway",
     category: "Nature",
-    caption: "Splashing through natural forest stream beds",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=600&h=1200&q=80",
+    caption: "Artistic stone sculptures and colorful landscaped gardens",
+    image: "/gallery-1.jpg",
     spanClass: "bento-tall"
   },
   {
+    id: "gal-02",
+    title: "Botanical Canopy & Flora",
+    category: "Nature",
+    caption: "Dense green pepper vines, flowering hibiscus, and silver oaks",
+    image: "/gallery-2.jpg",
+    spanClass: "bento-wide"
+  },
+  {
+    id: "gal-03",
+    title: "Lotus Fountain Mandapam",
+    category: "Trails",
+    caption: "Peaceful pavilion overlooking tranquil fountains and manicured greenery",
+    image: "/gallery-3.jpg",
+    spanClass: "bento-square"
+  },
+  {
     id: "gal-04",
-    title: "Open Gypsy Convoy",
-    category: "Fleet",
-    caption: "Customized 4x4 vehicles ready for morning expedition",
-    image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=600&q=80",
+    title: "Karadiyur Valley Drop",
+    category: "Viewpoint",
+    caption: "Breathtaking cliff edge vistas looking across mist-draped valley gorges",
+    image: "/gallery-4.jpg",
     spanClass: "bento-square"
   },
   {
     id: "gal-05",
-    title: "Silver Oak Mist Corridor",
-    category: "Trails",
-    caption: "Cruising through dense canopies and coffee aroma",
-    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
+    title: "Eastern Ridge Cliff Trail",
+    category: "Viewpoint",
+    caption: "Scenic mountain edge walkway with sweeping valley panoramas",
+    image: "/gallery-5.jpg",
     spanClass: "bento-wide"
   },
   {
     id: "gal-06",
-    title: "Mountain Ridge Drive",
+    title: "Yercaud Wild Bison Safari",
     category: "Action",
-    caption: "Navigating through treacherous cliffside dirt paths",
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80",
+    caption: "Spotting majestic Indian Gaurs roaming the lush coffee ridges",
+    image: "/gallery-6.jpg",
     spanClass: "bento-wide"
   },
   {
     id: "gal-07",
-    title: "Overlooking the Valley",
-    category: "Viewpoint",
-    caption: "A quiet moment taking in the sheer drop",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80",
-    spanClass: "bento-square"
-  },
-  {
-    id: "gal-08",
-    title: "Deep Jungle Stream",
+    title: "Yercaud Emerald Lake & Boat House",
     category: "Nature",
-    caption: "Uncharted waterfalls tucked inside the reserve",
-    image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&h=1200&q=80",
+    caption: "Gentle ripples on the mountain lake with vintage boat house views",
+    image: "/gallery-7.jpg",
     spanClass: "bento-tall"
   },
   {
-    id: "gal-09",
-    title: "Sunset Convoy Return",
-    category: "Fleet",
-    caption: "Our vehicles lining up as the sun sets over Yercaud",
-    image: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
+    id: "gal-08",
+    title: "Sri Rajarajeswari Temple",
+    category: "Trails",
+    caption: "Sacred mountain shrine surrounded by heritage spice trees and perfumery",
+    image: "/gallery-8.jpg",
     spanClass: "bento-square"
   },
   {
-    id: "gal-10",
-    title: "Lush Green Estate Trails",
+    id: "gal-09",
+    title: "Kiliyur Falls Cascade",
+    category: "Nature",
+    caption: "Crystal mountain stream cascading down ancient mossy granite rocks",
+    image: "/gallery-9.jpg",
+    spanClass: "bento-square"
+  },
+  {
+    id: "gal-11",
+    title: "National Orchidarium & Botanical Flora",
+    category: "Nature",
+    caption: "Lush botanical gardens with rare orchids and terraced green hedges",
+    image: "/botanical-garden.jpg",
+    spanClass: "bento-square",
+    laptopOnly: true
+  },
+  {
+    id: "gal-12",
+    title: "Shevaroyan Sacred Peak Shrine",
     category: "Trails",
-    caption: "Driving past heritage 19th-century coffee plantations",
-    image: "https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=800&q=80",
+    caption: "Ancient rock-carved sanctum situated atop Yercaud's highest summit",
+    image: "/shevaroyan-temple.jpg",
+    spanClass: "bento-square",
+    laptopOnly: true
+  },
+  {
+    id: "gal-10",
+    title: "Shevaroy Mountain Trek Trail",
+    category: "Trails",
+    caption: "Visitors exploring scenic walking trails along hill estates",
+    image: "/gallery-10.jpg",
     spanClass: "bento-wide"
+  },
+  {
+    id: "gal-13",
+    title: "Pagoda Point Panoramic Ridge",
+    category: "Viewpoint",
+    caption: "Historic stone watchtower and walking ridge overlooking the Salem plains",
+    image: "/pagoda-point.jpg",
+    spanClass: "bento-wide",
+    laptopOnly: true
   }
 ];

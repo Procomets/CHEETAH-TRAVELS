@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CalendarCheck,
@@ -10,7 +10,12 @@ import {
   Star,
   Clock,
   Users,
-  Award
+  Award,
+  ArrowRight,
+  Sparkles,
+  Mountain,
+  Car,
+  ChevronRight
 } from 'lucide-react';
 import ScrollExpand from '../../components/modules/hero/ScrollExpand';
 import { packagesData } from '../../data/packagesData';
@@ -28,6 +33,33 @@ import { BookingButton } from '../../components/common/BookingButton';
 
 export const HomePage = () => {
   const videoRef = useRef(null);
+
+  const [placeCategory, setPlaceCategory] = useState('All');
+  const [activePlaceId, setActivePlaceId] = useState(placesData[0]?.id || 'rose-garden');
+  const placeCategories = ['All', 'Viewpoints', 'Gardens', 'Sacred', 'Lakes & Falls'];
+
+  const filterSpots = (cat) => {
+    return placesData.filter((p) => {
+      if (cat === 'All') return true;
+      const c = p.category.toLowerCase();
+      if (cat === 'Viewpoints') return c.includes('cliff') || c.includes('view') || c.includes('seat') || c.includes('sunset');
+      if (cat === 'Gardens') return c.includes('garden') || c.includes('eco') || c.includes('flora') || c.includes('farm');
+      if (cat === 'Sacred') return c.includes('temple') || c.includes('sacred') || c.includes('peak');
+      if (cat === 'Lakes & Falls') return c.includes('lake') || c.includes('falls') || c.includes('waterfall') || c.includes('drive');
+      return true;
+    });
+  };
+
+  const filteredPlaces = filterSpots(placeCategory);
+  const activePlace = placesData.find((p) => p.id === activePlaceId) || filteredPlaces[0] || placesData[0];
+
+  const handleCategoryChange = (cat) => {
+    setPlaceCategory(cat);
+    const matched = filterSpots(cat);
+    if (matched.length > 0 && !matched.some(p => p.id === activePlaceId)) {
+      setActivePlaceId(matched[0].id);
+    }
+  };
 
   // Ensure video autoplays reliably across all modern browsers
   useEffect(() => {
@@ -112,6 +144,9 @@ export const HomePage = () => {
             </div>
           </div>
         </ScrollExpand>
+
+        {/* Mobile-only white fade at the bottom to blend seamlessly into the next section */}
+        <div className="hero-mobile-fade-bottom"></div>
       </section>
 
       {/* =========================================================================
@@ -122,19 +157,156 @@ export const HomePage = () => {
       {/* =========================================================================
           3. PLACES TO VISIT SECTION
           ========================================================================= */}
-      <section id="places" className="landing-section landing-section-alt">
+      <section id="places" className="landing-section landing-section-alt places-section-wrap">
         <div className="container">
-          <div className="section-header-box">
-            <h2 className="section-title-main">Top Places to Visit in Yercaud</h2>
-            <p className="section-subtitle-desc">
-              Explore panoramic cliff viewpoints, hidden streams, and sacred peak shrines accessible via our rugged 4x4 fleet.
-            </p>
+          <div className="section-header-box places-header-box">
+            <div className="places-header-text">
+              <span className="places-eyebrow">DESTINATIONS</span>
+              <h2 className="section-title-main">Top Places to Visit in Yercaud</h2>
+              <p className="section-subtitle-desc">
+                Explore panoramic cliff viewpoints, hidden streams, and sacred peak shrines accessible via our rugged 4x4 fleet.
+              </p>
+            </div>
+
+            <Link to="/places" className="places-view-all-desktop-link">
+              <span>View All ({placesData.length})</span>
+              <ArrowRight size={16} />
+            </Link>
           </div>
 
-          <div className="grid-4" style={{ gap: '1.5rem' }}>
-            {placesData.map((place) => (
-              <PlaceCardPlaceholder key={place.id} place={place} />
-            ))}
+          {/* =========================================================
+              MOBILE INTERACTIVE SPOTLIGHT SHOWCASE (<= 768px)
+              ========================================================= */}
+          <div className="places-mobile-spotlight">
+            {/* Quick Category Filter Pills */}
+            <div className="places-filter-scroll">
+              {placeCategories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`places-filter-chip ${placeCategory === cat ? 'active' : ''}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* 1. Large Hero Spotlight Card */}
+            <div className="places-spotlight-card" key={activePlace.id}>
+              <img 
+                src={activePlace.image} 
+                alt={activePlace.name} 
+                className="places-spotlight-img" 
+              />
+              <div className="places-spotlight-overlay">
+                {/* Top Badge Row */}
+                <div className="places-spotlight-top">
+                  <span className="places-spotlight-badge">
+                    <Sparkles size={13} />
+                    <span>{activePlace.category}</span>
+                  </span>
+
+                  <div className="places-spotlight-rating">
+                    <Star size={13} fill="#fbbf24" color="#fbbf24" />
+                    <span>{activePlace.rating}</span>
+                    {activePlace.ratingCount && (
+                      <span className="places-spotlight-count">({activePlace.ratingCount})</span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bottom Details & CTAs */}
+                <div className="places-spotlight-bottom">
+                  {activePlace.elevation && (
+                    <div className="places-spotlight-elevation">
+                      <Mountain size={13} />
+                      <span>{activePlace.elevation}</span>
+                    </div>
+                  )}
+
+                  <h3 className="places-spotlight-title">{activePlace.name}</h3>
+
+                  <p className="places-spotlight-desc">
+                    {activePlace.description}
+                  </p>
+
+                  <div className="places-spotlight-actions">
+                    <BookingButton 
+                      message={`Hello Cheetah Travels, I would like to book a jeep safari to visit "${activePlace.name}" (${activePlace.elevation ? activePlace.elevation : activePlace.category}). Please share details and pricing.`}
+                      className="places-spotlight-book-btn"
+                    >
+                      <Car size={16} />
+                      <span>Book Safari</span>
+                    </BookingButton>
+
+                    <Link to="/places" className="places-spotlight-info-btn">
+                      <span>Explore</span>
+                      <ChevronRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Mini Thumbnails Row */}
+            <div className="places-thumbnails-header">
+              <span className="places-thumbnails-title">Tap to switch destination ({filteredPlaces.length}):</span>
+              <span className="places-thumbnails-counter">Active: {activePlace.name}</span>
+            </div>
+
+            <div className="places-thumbnails-scroll">
+              {filteredPlaces.map((p, idx) => {
+                const isSelected = p.id === activePlace.id;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => setActivePlaceId(p.id)}
+                    className={`places-thumb-card ${isSelected ? 'active' : ''}`}
+                    aria-label={`View ${p.name}`}
+                  >
+                    <img src={p.image} alt={p.name} className="places-thumb-img" loading="lazy" />
+                    <div className="places-thumb-overlay">
+                      <span className="places-thumb-num">#{idx + 1}</span>
+                      <span className="places-thumb-name">{p.name}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <Link to="/places" className="places-mobile-view-all-btn">
+              <span>View All {placesData.length} Destinations</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          {/* =========================================================
+              DESKTOP GRID (> 768px)
+              ========================================================= */}
+          <div className="places-desktop-container">
+            {/* Quick Category Filter Pills */}
+            <div className="places-filter-scroll">
+              {placeCategories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`places-filter-chip ${placeCategory === cat ? 'active' : ''}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <div className="places-grid">
+              {filteredPlaces.map((place) => (
+                <div className="places-card-col" key={place.id}>
+                  <PlaceCardPlaceholder place={place} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -142,13 +314,10 @@ export const HomePage = () => {
       {/* =========================================================================
           4. PHOTO GALLERY SECTION
           ========================================================================= */}
-      <section id="gallery" className="landing-section">
+      <section id="gallery" className="landing-section gallery-section-wrap">
         <div className="container">
           <div className="section-header-box">
             <h2 className="section-title-main">Safari Moments & Photo Gallery</h2>
-            <p className="section-subtitle-desc">
-              Glimpses of raw off-road action, winding mountain hairpin curves, dense coffee canopy corridors, and sunset cliffs.
-            </p>
           </div>
 
           <GalleryGridPlaceholder />

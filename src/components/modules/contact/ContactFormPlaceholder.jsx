@@ -82,9 +82,10 @@ export const ContactFormPlaceholder = () => {
                 value={formData.interest}
                 onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
               >
-                <option value="Sunrise Peak Expedition">Sunrise Peak Expedition</option>
-                <option value="Deep Forest & Waterfalls Trail">Deep Forest & Waterfalls Trail</option>
-                <option value="Grand Yercaud All-in-One Safari">Grand Yercaud All-in-One Safari</option>
+                <option value="Auto Safari">Auto Safari</option>
+                <option value="Car Safari">Car Safari</option>
+                <option value="Jeep Safari">Jeep Safari</option>
+                <option value="Night Jeep Safari">Night Jeep Safari</option>
                 <option value="Corporate / Large Group Custom Trail">Corporate / Large Group Custom Trail</option>
               </select>
             </div>

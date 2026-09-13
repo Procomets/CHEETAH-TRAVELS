@@ -19,11 +19,10 @@ export const PackageDetailPage = () => {
       <PageHeader
         title={pkg.title}
         subtitle={pkg.subtitle}
-      >
-        <Link to="/packages" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-primary-600)', textDecoration: 'none', fontWeight: 600 }}>
-          <ArrowLeft size={16} /> Back to all packages
-        </Link>
-      </PageHeader>
+        showBack={true}
+        backTo="/packages"
+        backLabel="Back to All Packages"
+      />
 
       <div className="container" style={{ paddingBottom: '4rem' }}>
         <div className="grid-3">
