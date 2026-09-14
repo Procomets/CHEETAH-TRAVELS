@@ -162,8 +162,8 @@
 }
 
 .pkg-badge-star {
-  color: #C8A96A;
-  fill: #C8A96A;
+  color: #f59e0b;
+  fill: #f59e0b;
   flex-shrink: 0;
 }
 
@@ -707,7 +707,7 @@
     font-size: 1.45rem;
     font-weight: 800;
     margin-bottom: 1.25rem;
-    text-align: left;
+    text-align: center;
     color: #0f172a;
     letter-spacing: -0.02em;
   }
@@ -720,10 +720,11 @@
     padding: 0.25rem 0 0 0;
   }
 
-  /* Vertical Background Track Line (From Circle 1 Center strictly to Circle 5 Center) */
+  /* Vertical Background Track Line (Centered down the middle behind nodes) */
   .pkg-m-track-line {
     position: absolute;
-    left: 19px; /* centered behind 40px circle */
+    left: 50%;
+    transform: translateX(-50%);
     width: 3px;
     background: #e2e8f0;
     border-radius: 9999px;
@@ -763,132 +764,134 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 1.15rem;
+    gap: 2.25rem;
     position: relative;
     z-index: 2;
   }
 
-  /* Single Step Item */
+  /* Single Step Item (Centered Vertical Stack) */
   .pkg-m-step-item {
     display: flex;
-    align-items: flex-start;
-    gap: 0.95rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 100%;
   }
 
-  /* Milestone Node Container */
-  .pkg-m-node-wrap {
+  /* Node Outer Container */
+  .pkg-m-node-outer-wrap {
     flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     position: relative;
     z-index: 3;
-    width: 40px;
-    padding-top: 0.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 0.85rem;
   }
 
-  /* Green Milestone Circle (1 to 5) */
-  .pkg-m-node {
-    width: 40px;
-    height: 40px;
+  /* Outer Circle (matching desktop pkg-step-icon-outer) */
+  .pkg-m-node-outer {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #1E826F 0%, #15803d 100%);
-    border: 2px solid #1E826F;
-    color: #ffffff;
+    border: 2px solid #e2e8f0;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 0.92rem;
-    box-shadow: 0 0 0 4px rgba(30, 130, 111, 0.2), 0 4px 12px rgba(30, 130, 111, 0.25);
     position: relative;
-    z-index: 3;
+    transition: border-color 0.3s ease, transform 0.3s ease;
   }
 
-  /* Simple Clean Step Card */
-  .pkg-m-card {
-    flex: 1;
-    background: #ffffff;
-    border: 1px solid rgba(30, 130, 111, 0.35);
-    border-radius: 16px;
-    padding: 0.95rem 1.15rem;
+  .pkg-m-step-item.active .pkg-m-node-outer {
+    border-color: #1E826F;
+    transform: scale(1.05);
+  }
+
+  /* Inner Circle with Icon (matching desktop pkg-step-icon-inner) */
+  .pkg-m-node-inner {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    color: #1E826F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pkg-m-step-item.active .pkg-m-node-inner {
+    background-color: #1E826F;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(30, 130, 111, 0.35);
+  }
+
+  /* Number Badge at Bottom of Circle (Hidden on mobile) */
+  .pkg-m-number-badge {
+    display: none !important;
+  }
+
+  /* Step Content (centered below node circle) */
+  .pkg-m-content {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    box-shadow: 0 6px 20px rgba(30, 130, 111, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
-  }
-
-  .pkg-m-card-header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.15rem;
-  }
-
-  .pkg-m-tag {
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: #1E826F;
-    background: rgba(30, 130, 111, 0.09);
-    padding: 0.18rem 0.5rem;
-    border-radius: 6px;
-  }
-
-  .pkg-m-icon-mini {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: rgba(30, 130, 111, 0.08);
-    color: #1E826F;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .pkg-m-step-item.active .pkg-m-icon-mini {
-    background: rgba(30, 130, 111, 0.14);
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 0.35rem;
+    position: relative;
+    z-index: 3;
+    background: #ffffff;
+    padding: 0 0.75rem;
   }
 
   .pkg-m-title {
     font-family: var(--font-heading);
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     font-weight: 800;
     color: #0f172a;
     margin: 0;
     line-height: 1.25;
+    transition: color 0.3s ease;
+  }
+
+  .pkg-m-step-item.active .pkg-m-title {
+    color: #1E826F;
   }
 
   .pkg-m-desc {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #64748b;
-    line-height: 1.45;
+    line-height: 1.5;
     margin: 0;
   }
 
   .pkg-m-action-wrap {
-    padding-top: 0.45rem;
+    padding-top: 0.75rem;
     margin-top: 0.25rem;
-    border-top: 1px solid #f1f5f9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .pkg-m-cta-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.55rem 1rem;
-    border-radius: 10px;
+    padding: 0.65rem 1.25rem;
+    border-radius: 12px;
     background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
     border: 1px solid #15803d;
     color: #ffffff;
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(21, 128, 61, 0.28);
+    box-shadow: 0 4px 14px rgba(21, 128, 61, 0.28);
     text-decoration: none;
     transition: all 0.2s ease;
   }

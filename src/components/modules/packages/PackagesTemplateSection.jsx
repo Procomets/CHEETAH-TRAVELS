@@ -165,10 +165,10 @@ export const PackagesTemplateSection = () => {
           return { top: newTop, height: newHeight };
         });
 
-        // Trigger boundaries: starts when Circle 1 enters 75% of screen;
-        // reaches 100% (touches circle 5) when Circle 5 enters 80% of screen.
-        const startTrigger = windowHeight * 0.75;
-        const endTrigger = windowHeight * 0.80;
+        // Trigger boundaries: starts when Circle 1 enters 85% of screen;
+        // reaches 100% (touches circle 5) when Circle 5 enters 92% of screen.
+        const startTrigger = windowHeight * 0.85;
+        const endTrigger = windowHeight * 0.92;
 
         let p = 0;
         if (totalDistance > 0) {
@@ -179,10 +179,11 @@ export const PackagesTemplateSection = () => {
             // Above the timeline
             p = 0;
           } else {
-            // Smoothly move the green line down from 1 to 5 as you scroll down!
-            const scrollRange = Math.max(1, totalDistance - (endTrigger - startTrigger));
-            const scrolled = startTrigger - firstRect.top;
-            p = scrolled / scrollRange;
+            // Smoothly move the green line down from 1 to 5 as you scroll down
+            const scrolled = Math.max(0, startTrigger - firstRect.top);
+            const remaining = Math.max(0, lastRect.top - endTrigger);
+            const totalRange = scrolled + remaining;
+            p = totalRange > 0 ? scrolled / totalRange : 1;
           }
         }
         p = Math.max(0, Math.min(1, p));
@@ -382,7 +383,6 @@ export const PackagesTemplateSection = () => {
                   <div className="pkg-step-number">{s.step}</div>
                 </div>
                 <div className="pkg-step-content">
-                  <span className="pkg-step-num-pill">{s.tag}</span>
                   <h4 className="pkg-step-title">{s.title}</h4>
                   <p className="pkg-step-desc">{s.desc}</p>
                 </div>
@@ -416,30 +416,28 @@ export const PackagesTemplateSection = () => {
           <div className="pkg-m-steps-list">
             {safariSteps.map((s, idx) => {
               const Icon = s.icon;
+              const isActive = mobileProgress >= s.progressReq;
 
               return (
                 <div 
                   key={s.step} 
-                  className="pkg-m-step-item"
+                  className={`pkg-m-step-item ${isActive ? 'active' : ''}`}
                 >
-                  {/* Point / Milestone Node */}
-                  <div className="pkg-m-node-wrap">
+                  {/* Milestone Node (matching desktop circle icon + number badge design) */}
+                  <div className="pkg-m-node-outer-wrap">
                     <div 
                       ref={idx === 0 ? firstNodeRef : idx === safariSteps.length - 1 ? lastNodeRef : null}
-                      className="pkg-m-node"
+                      className="pkg-m-node-outer"
                     >
-                      <span className="pkg-m-num">{s.step}</span>
+                      <div className="pkg-m-node-inner">
+                        <Icon size={20} />
+                      </div>
+                      <div className="pkg-m-number-badge">{s.step}</div>
                     </div>
                   </div>
 
-                  {/* Step Card */}
-                  <div className="pkg-m-card">
-                    <div className="pkg-m-card-header">
-                      <span className="pkg-m-tag">{s.tag}</span>
-                      <div className="pkg-m-icon-mini">
-                        <Icon size={16} />
-                      </div>
-                    </div>
+                  {/* Step Content */}
+                  <div className="pkg-m-content">
                     <h4 className="pkg-m-title">{s.title}</h4>
                     <p className="pkg-m-desc">{s.desc}</p>
 

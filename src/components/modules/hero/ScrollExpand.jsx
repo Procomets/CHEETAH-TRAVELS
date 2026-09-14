@@ -128,7 +128,11 @@ const ScrollExpand = ({
       stageH = c.useWindowScroll ? window.innerHeight : root.clientHeight;
       if (stageH <= 0) return;
       stage.style.height = `${stageH}px`;
-      track.style.height = `${stageH * (1 + Math.max(0, c.scrollDistance) + Math.max(0, c.holdDistance))}px`;
+      
+      const isMob = typeof window !== 'undefined' && window.innerWidth <= 768;
+      const effectiveEnabled = c.enabled && !isMob;
+      const extraScroll = effectiveEnabled ? Math.max(0, c.scrollDistance) + Math.max(0, c.holdDistance) : 0;
+      track.style.height = `${stageH * (1 + extraScroll)}px`;
 
       const w = root.clientWidth || stageH;
       stage.style.setProperty('--se-title-size', `${clamp(w * 0.075, 20, 84)}px`);
@@ -136,7 +140,8 @@ const ScrollExpand = ({
 
     const readProgress = () => {
       const c = propsRef.current;
-      if (!c.enabled) return 1;
+      const isMob = typeof window !== 'undefined' && window.innerWidth <= 768;
+      if (!c.enabled || isMob) return 1;
       const span = stageH * Math.max(0.01, c.scrollDistance);
       if (c.useWindowScroll) {
         const top = track.getBoundingClientRect().top;

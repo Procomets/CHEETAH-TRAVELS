@@ -36,7 +36,6 @@ export const HomePage = () => {
 
   const [placeCategory, setPlaceCategory] = useState('All');
   const [activePlaceId, setActivePlaceId] = useState(placesData[0]?.id || 'rose-garden');
-  const placeCategories = ['All', 'Viewpoints', 'Gardens', 'Sacred', 'Lakes & Falls'];
 
   const filterSpots = (cat) => {
     return placesData.filter((p) => {
@@ -101,7 +100,7 @@ export const HomePage = () => {
       {/* =========================================================================
           1. HERO SECTION (Full-Screen Video Background with 35% Edge Blur)
           ========================================================================= */}
-      <section id="hero" aria-label="Yercaud Jeep Safari Hero" style={{ position: 'relative', background: '#070d0a' }}>
+      <section id="hero" aria-label="Yercaud Jeep Safari Hero" style={{ position: 'relative', background: '#000000' }}>
         <ScrollExpand
           src="https://res.cloudinary.com/dmu8jxozw/video/upload/Jeep_climbing_mountain_drone_view_202609081919_gwr_video_mvp.mp4"
           mediaType="video"
@@ -161,36 +160,17 @@ export const HomePage = () => {
         <div className="container">
           <div className="section-header-box places-header-box">
             <div className="places-header-text">
-              <span className="places-eyebrow">DESTINATIONS</span>
               <h2 className="section-title-main">Top Places to Visit in Yercaud</h2>
               <p className="section-subtitle-desc">
                 Explore panoramic cliff viewpoints, hidden streams, and sacred peak shrines accessible via our rugged 4x4 fleet.
               </p>
             </div>
-
-            <Link to="/places" className="places-view-all-desktop-link">
-              <span>View All ({placesData.length})</span>
-              <ArrowRight size={16} />
-            </Link>
           </div>
 
           {/* =========================================================
               MOBILE INTERACTIVE SPOTLIGHT SHOWCASE (<= 768px)
               ========================================================= */}
           <div className="places-mobile-spotlight">
-            {/* Quick Category Filter Pills */}
-            <div className="places-filter-scroll">
-              {placeCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => handleCategoryChange(cat)}
-                  className={`places-filter-chip ${placeCategory === cat ? 'active' : ''}`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
 
             {/* 1. Large Hero Spotlight Card */}
             <div className="places-spotlight-card" key={activePlace.id}>
@@ -286,19 +266,6 @@ export const HomePage = () => {
               DESKTOP GRID (> 768px)
               ========================================================= */}
           <div className="places-desktop-container">
-            {/* Quick Category Filter Pills */}
-            <div className="places-filter-scroll">
-              {placeCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => handleCategoryChange(cat)}
-                  className={`places-filter-chip ${placeCategory === cat ? 'active' : ''}`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
 
             <div className="places-grid">
               {filteredPlaces.map((place) => (

@@ -10,15 +10,6 @@ import { galleryData } from '../../../data/galleryData';
 import { BookingButton } from '../../common/BookingButton';
 import '../../../styles/gallery.css';
 
-const filterCategories = [
-  { id: 'All', label: 'All Moments' },
-  { id: 'Action', label: 'Off-Road Action' },
-  { id: 'Viewpoint', label: 'Viewpoints' },
-  { id: 'Nature', label: 'Waterfalls & Forest' },
-  { id: 'Fleet', label: '4x4 Fleet' },
-  { id: 'Trails', label: 'Private Trails' }
-];
-
 export const GalleryGridPlaceholder = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [activePhotoIndex, setActivePhotoIndex] = useState(null);
@@ -109,32 +100,6 @@ export const GalleryGridPlaceholder = () => {
 
   return (
     <div className="gallery-section-container">
-
-      {/* Category Filter Chips */}
-      <div className="gallery-filter-chips">
-        {filterCategories.map((cat) => {
-          const count = cat.id === 'All'
-            ? baseItems.length
-            : baseItems.filter((i) => i.category === cat.id).length;
-
-          if (count === 0 && cat.id !== 'All') return null;
-
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => {
-                setActiveCategory(cat.id);
-                setActivePhotoIndex(null);
-              }}
-              className={`gallery-filter-chip ${activeCategory === cat.id ? 'active' : ''}`}
-            >
-              <span>{cat.label}</span>
-              <span className="gallery-filter-count">{count}</span>
-            </button>
-          );
-        })}
-      </div>
 
       {/* Gallery Grid */}
       <div className="gallery-grid">
